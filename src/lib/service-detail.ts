@@ -208,8 +208,6 @@ export async function getServiceDetail(identifier: string): Promise<ServiceDetai
     let query: any = { slug: identifier };
     if (Types.ObjectId.isValid(identifier)) {
         query = { $or: [{ slug: identifier }, { _id: new Types.ObjectId(identifier) }] };
-    } else {
-        query = { $or: [{ slug: identifier }, { _id: identifier }] };
     }
 
     const serviceDoc = await Service.findOne(query).exec();
